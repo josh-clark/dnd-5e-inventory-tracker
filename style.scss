@@ -1,0 +1,20 @@
+$color-white: #FFFFFF;
+$color-black: #161616;
+$color-text: #242424;
+
+* {
+	box-sizing: border-box;
+	transition-duration: 0.4s;
+}
+
+html {
+	font-size: 16px;
+}
+
+body {
+	font-family: Arial, sans-serif;
+}
+
+i {
+	font-style: italic;
+}
