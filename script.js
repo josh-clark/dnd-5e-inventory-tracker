@@ -24,11 +24,26 @@
 	}
 
 	function calculateTotal() {
+		var capacity = $("#character__capacity").val();
 		var total = 0;
 		$(".inventory__item--subtotal--field").each(function () {
 			total += parseInt(this.value, 10);
 		});
 		$(".total__weight--field").val(total);
+
+		var progress = total / capacity;
+		var difference = capacity - total;
+		$(".total__progress--bar").width((progress * 100) + "%");
+		$(".total__progress--percentage").text(Math.round(progress * 100) + "%");
+
+		if (difference >= 0) {
+			$(".total__progress--remaining").text(difference + " remaining");
+			$(".total__progress--bar-error").width("0");
+		}
+		else {
+			$(".total__progress--remaining").text((-1 * difference) + " overburdened");
+			$(".total__progress--bar-error").width(((progress - 1) * 100) + "%");
+		}
 	}
 
 	function calculate() {

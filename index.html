@@ -31,9 +31,9 @@
 				<div class="character__multiplier">
 					<label for="character__multiplier" class="character__multiplier--label label">Multiplier</label>
 					<select id="character__multiplier" class="character__multiplier--field field">
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="15" selected>15</option>
+						<option value="5">×5</option>
+						<option value="10">×10</option>
+						<option value="15" selected>×15</option>
 					</select>
 				</div>
 
@@ -45,6 +45,24 @@
 		</div>
 
 		<div class="inventory">
+			<div class="inventory__header row">
+				<div class="inventory__item--name">
+					Name
+				</div>
+
+				<div class="inventory__item--weight">
+					Weight
+				</div>
+
+				<div class="inventory__item--quantity">
+					Quantity
+				</div>
+
+				<div class="inventory__item--subtotal">
+					Subtotal
+				</div>
+			</div>
+
 			<div class="inventory__item row sample">
 				<div class="inventory__item--name">
 					<label for="item-name-001" class="inventory__item--name--label label">Name</label>
@@ -71,7 +89,12 @@
 		<div class="total">
 			<div class="row">
 				<div class="total__progress">
-					
+					<div class="total__progress--percentage"></div>
+					<div class="total__progress--remaining"></div>
+					<div class="total__progress--bar-background">
+						<div class="total__progress--bar"></div>
+						<div class="total__progress--bar-error"></div>
+					</div>
 				</div>
 
 				<div class="total__weight">
