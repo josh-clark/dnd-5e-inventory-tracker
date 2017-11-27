@@ -39,7 +39,7 @@
 
 				<div class="character__capacity">
 					<label for="character__capacity" class="character__capacity--label label">Capacity</label>
-					<input id="character__capacity" class="character__capacity--field field" type="number" readonly />
+					<input id="character__capacity" class="character__capacity--field field" type="text" readonly data-unit=" lb." />
 				</div>
 			</div>
 		</div>
@@ -65,24 +65,30 @@
 
 			<div class="inventory__item row sample">
 				<div class="inventory__item--name">
-					<label for="item-name-001" class="inventory__item--name--label label">Name</label>
-					<input id="item-name-001" class="inventory__item--name--field field" type="text" placeholder="Name" />
+					<label class="inventory__item--name--label label">Name</label>
+					<input class="inventory__item--name--field field" type="text" placeholder="Name" />
 				</div>
 
 				<div class="inventory__item--weight">
-					<label for="item-weight-001" class="inventory__item--weight--label label">Weight</label>
-					<input id="item-name-001" class="inventory__item--weight--field field" type="number" min="1" max="1000" placeholder="Weight" />
+					<label class="inventory__item--weight--label label">Weight</label>
+					<input class="inventory__item--weight--field field" type="number" min="0" max="1000" placeholder="Weight" />
+					<span class="inventory__item--weight--unit">lb.</span>
 				</div>
 
 				<div class="inventory__item--quantity">
-					<label for="item-quantity-001" class="inventory__item--quantity--label label">Quantity</label>
-					<input id="item-quantity-001" class="inventory__item--quantity--field field" type="number" min="1" max="100" placeholder="Qty" />
+					<label class="inventory__item--quantity--label label">Quantity</label>
+					<input class="inventory__item--quantity--field field" type="number" min="0" max="100" placeholder="Qty" />
+					<span class="inventory__item--quantity--unit">×</span>
 				</div>
 
 				<div class="inventory__item--subtotal">
-					<label for="item-subtotal-001" class="inventory__item--subtotal--label label">Subtotal</label>
-					<input id="item-subtotal-001" class="inventory__item--subtotal--field field" type="number" readonly />
+					<label class="inventory__item--subtotal--label label">Subtotal</label>
+					<input class="inventory__item--subtotal--field field" type="text" readonly data-unit=" lb." />
 				</div>
+			</div>
+
+			<div class="inventory__controls row">
+				<button class="inventory__controls--add-row" type="submit" value="add">Add Item</button>
 			</div>
 		</div>
 
@@ -90,7 +96,7 @@
 			<div class="row">
 				<div class="total__progress">
 					<div class="total__progress--percentage"></div>
-					<div class="total__progress--remaining"></div>
+					<div class="total__progress--remaining" data-unit=" lb."></div>
 					<div class="total__progress--bar-background">
 						<div class="total__progress--bar"></div>
 						<div class="total__progress--bar-error"></div>
@@ -99,7 +105,7 @@
 
 				<div class="total__weight">
 					<label for="total__weight" class="total__weight--label label">Total</label>
-					<input id="total__weight" class="total__weight--field field" type="number" readonly />
+					<input id="total__weight" class="total__weight--field field" type="text" readonly data-unit=" lb." />
 				</div>
 			</div>
 		</div>
