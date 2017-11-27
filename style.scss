@@ -2,19 +2,172 @@ $color-white: #FFFFFF;
 $color-black: #161616;
 $color-text: #242424;
 
+$color-header-bg: #AA0033;
+$header-height: 75px;
+$color-body-bg: transparent;
+$color-footer-bg: #3300AA;
+$footer-height: 50px;
+
 * {
 	box-sizing: border-box;
-	transition-duration: 0.4s;
+	transition-duration: 0.3s;
 }
 
 html {
 	font-size: 16px;
+	min-height: 100%;
 }
 
 body {
+	background-color: $color-body-bg;
+	color: $color-text;
 	font-family: Arial, sans-serif;
+	min-height: 100%;
+	padding-top: $header-height;
+	padding-bottom: $footer-height;
 }
 
-i {
-	font-style: italic;
+.row {
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1200px;
+	padding-right: 0.75rem;
+	padding-left: 0.75rem;
+}
+
+.field {
+	font-size: 1rem;
+	max-width: 100%;
+	padding-right: 0;
+	padding-left: 0.25rem;
+}
+
+.character,
+.inventory,
+.total {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.character {
+	background-color: $color-header-bg;
+	color: $color-white;
+	height: $header-height;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	@extend %clearfix;
+
+	&__score,
+	&__size-multiplier,
+	&__multiplier,
+	&__capacity {
+		float: left;
+		padding-right: 1rem;
+		width: 25%;
+
+		.label, .field {
+			display: block;
+		}
+	}
+
+	&__score {
+		width: 20%;
+	}
+
+	&__size-multiplier {
+		width: 35%;
+	}
+
+	&__multiplier {
+		width: 20%;
+	}
+
+	&__capacity {
+		width: 25%;
+	}
+}
+
+.inventory {
+	&__item {
+		@extend %clearfix;
+
+		&--name,
+		&--weight,
+		&--quantity,
+		&--subtotal {
+			float: left;
+			padding-right: 1rem;
+
+			&--label {
+				display: none;
+			}
+
+			&--field {
+				width: 100%;
+			}
+		}
+
+		&--name {
+			width: 50%;
+		}
+
+		&--weight {
+			width: 15%;
+		}
+
+		&--quantity {
+			width: 10%;
+		}
+
+		&--subtotal {
+			width: 25%;
+
+			&--field {
+				width: auto;
+			}
+		}
+	}
+}
+
+.total {
+	background-color: $color-footer-bg;
+	height: $footer-height;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: left;
+
+	&__weight {
+		float: right;
+		width: 25%;
+	}
+}
+
+@media screen and (min-width: 480px) {
+	html {
+		font-size: 20px;
+	}
+}
+
+@media screen and (min-width: 720px) {
+	html {
+		font-size: 22px;
+	}
+}
+
+@media screen and (min-width: 1080px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+%clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
 }

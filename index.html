@@ -9,16 +9,76 @@
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
 	</head>
 	<body>
-		<div class="character-stats">
-			
+		<div class="character">
+			<div class="row">
+				<div class="character__score">
+					<label for="character__score" class="character__score--label label">Strength</label>
+					<input id="character__score" class="character__score--field field" type="number" min="1" max="30" required placeholder="STR" value="10" />
+				</div>
+
+				<div class="character__size-multiplier">
+					<label for="character__size-multiplier" class="character__size-multiplier--label label">Size</label>
+					<select id="character__size-multiplier" class="character__size-multiplier--field field">
+						<option value="0.5">Tiny (×½)</option>
+						<option value="1">Small (×1)</option>
+						<option value="1" selected>Medium (×1)</option>
+						<option value="2">Large (×2)</option>
+						<option value="4">Huge (×4)</option>
+						<option value="8">Gargantuan (×8)</option>
+					</select>
+				</div>
+
+				<div class="character__multiplier">
+					<label for="character__multiplier" class="character__multiplier--label label">Multiplier</label>
+					<select id="character__multiplier" class="character__multiplier--field field">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15" selected>15</option>
+					</select>
+				</div>
+
+				<div class="character__capacity">
+					<label for="character__capacity" class="character__capacity--label label">Capacity</label>
+					<input id="character__capacity" class="character__capacity--field field" type="number" readonly />
+				</div>
+			</div>
 		</div>
 
 		<div class="inventory">
-			
+			<div class="inventory__item row sample">
+				<div class="inventory__item--name">
+					<label for="item-name-001" class="inventory__item--name--label label">Name</label>
+					<input id="item-name-001" class="inventory__item--name--field field" type="text" placeholder="Name" />
+				</div>
+
+				<div class="inventory__item--weight">
+					<label for="item-weight-001" class="inventory__item--weight--label label">Weight</label>
+					<input id="item-name-001" class="inventory__item--weight--field field" type="number" min="1" max="1000" placeholder="Weight" />
+				</div>
+
+				<div class="inventory__item--quantity">
+					<label for="item-quantity-001" class="inventory__item--quantity--label label">Quantity</label>
+					<input id="item-quantity-001" class="inventory__item--quantity--field field" type="number" min="1" max="100" placeholder="Qty" />
+				</div>
+
+				<div class="inventory__item--subtotal">
+					<label for="item-subtotal-001" class="inventory__item--subtotal--label label">Subtotal</label>
+					<input id="item-subtotal-001" class="inventory__item--subtotal--field field" type="number" readonly />
+				</div>
+			</div>
 		</div>
 
-		<div class="totals">
-			
+		<div class="total">
+			<div class="row">
+				<div class="total__progress">
+					
+				</div>
+
+				<div class="total__weight">
+					<label for="total__weight" class="total__weight--label label">Total</label>
+					<input id="total__weight" class="total__weight--field field" type="number" readonly />
+				</div>
+			</div>
 		</div>
 
 		<script src="script.js" type="text/javascript"></script>
