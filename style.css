@@ -97,6 +97,7 @@ body {
   width: 15%;
 }
 .character__capacity--field {
+  padding-right: 0.25rem;
   text-align: right;
 }
 
@@ -171,6 +172,7 @@ body {
   width: 15%;
 }
 .inventory__item--subtotal--field {
+  padding-right: 0.25rem;
   text-align: right;
   width: auto;
 }
@@ -246,6 +248,7 @@ body {
   margin-bottom: 0.375rem;
 }
 .total__weight--field {
+  padding-right: 0.25rem;
   text-align: right;
 }
 
