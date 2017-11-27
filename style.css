@@ -1,0 +1,273 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  min-height: 100%;
+}
+
+body {
+  background-color: #C2C2C2;
+  color: #242424;
+  font-family: Arial, sans-serif;
+  min-height: 100%;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.row {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.field {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: #FFFFFF;
+  font-size: 1rem;
+  height: 1.25rem;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0.25rem;
+}
+.field[type="number"][readonly] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding-right: 0.25rem;
+}
+.field[type="number"][readonly]::-webkit-inner-spin-button, .field[type="number"][readonly]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.field option {
+  color: #242424;
+}
+
+.character,
+.inventory,
+.total {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.character {
+  background-color: #212121;
+  color: #FFFFFF;
+  height: 4rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+.character__score, .character__size-multiplier, .character__multiplier, .character__capacity {
+  float: left;
+  padding-right: 1rem;
+  width: 25%;
+}
+.character__score--label, .character__score--field, .character__size-multiplier--label, .character__size-multiplier--field, .character__multiplier--label, .character__multiplier--field, .character__capacity--label, .character__capacity--field {
+  display: block;
+}
+.character__score--label, .character__size-multiplier--label, .character__multiplier--label, .character__capacity--label {
+  margin-bottom: 0.375rem;
+}
+.character__score--field, .character__size-multiplier--field, .character__multiplier--field, .character__capacity--field {
+  text-align: center;
+}
+.character__score--field::placeholder, .character__size-multiplier--field::placeholder, .character__multiplier--field::placeholder, .character__capacity--field::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9em;
+  font-style: italic;
+}
+.character__score {
+  width: 20%;
+}
+.character__size-multiplier {
+  width: 40%;
+}
+.character__multiplier {
+  width: 25%;
+}
+.character__capacity {
+  padding-right: 0;
+  width: 15%;
+}
+.character__capacity--field {
+  text-align: right;
+}
+
+.inventory__header, .inventory__item {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.inventory__item.sample {
+  display: none;
+}
+.inventory__item:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.inventory__item--name, .inventory__item--weight, .inventory__item--quantity, .inventory__item--subtotal {
+  float: left;
+  padding-right: 1rem;
+}
+.inventory__item--name--label, .inventory__item--weight--label, .inventory__item--quantity--label, .inventory__item--subtotal--label {
+  display: none;
+}
+.inventory__item--name--field, .inventory__item--weight--field, .inventory__item--quantity--field, .inventory__item--subtotal--field {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #242424;
+  width: 100%;
+}
+.inventory__item--name--field::placeholder, .inventory__item--weight--field::placeholder, .inventory__item--quantity--field::placeholder, .inventory__item--subtotal--field::placeholder {
+  color: rgba(36, 36, 36, 0.75);
+  font-size: 0.9em;
+  font-style: italic;
+}
+.inventory__item--name {
+  width: 50%;
+}
+.inventory__item--weight, .inventory__item--quantity {
+  position: relative;
+  width: 17.5%;
+}
+.inventory__item--weight--field, .inventory__item--quantity--field {
+  padding-right: 0;
+  padding-left: 0;
+  text-align: center;
+}
+.inventory__item--weight--unit, .inventory__item--quantity--unit {
+  position: absolute;
+  top: 0.125rem;
+  display: none;
+}
+.inventory__item--weight--field:not(:placeholder-shown) ~ .inventory__item--weight--unit, .inventory__item--quantity--field:not(:placeholder-shown) ~ .inventory__item--weight--unit, .inventory__item--weight--field:not(:placeholder-shown) ~ .inventory__item--quantity--unit, .inventory__item--quantity--field:not(:placeholder-shown) ~ .inventory__item--quantity--unit {
+  display: block;
+}
+.inventory__item--weight--field::-webkit-inner-spin-button, .inventory__item--weight--field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.inventory__item--weight--field:not(:placeholder-shown) {
+  padding-right: 1.625rem;
+  text-align: right;
+}
+.inventory__item--weight--unit {
+  right: 1.25rem;
+}
+.inventory__item--quantity--field {
+  text-align: center;
+}
+.inventory__item--quantity--field:not(:placeholder-shown) {
+  padding-left: 0.5rem;
+}
+.inventory__item--quantity--unit {
+  left: 0.375rem;
+}
+.inventory__item--subtotal {
+  padding-right: 0;
+  width: 15%;
+}
+.inventory__item--subtotal--field {
+  text-align: right;
+  width: auto;
+}
+.inventory__controls {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.inventory__controls--add-row {
+  background-color: rgba(255, 255, 255, 0.75);
+  border: none;
+  color: #242424;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.total {
+  background-color: #242424;
+  color: #FFFFFF;
+  height: 4rem;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  text-align: left;
+}
+.total__progress {
+  float: left;
+  padding-right: 1rem;
+  width: 85%;
+}
+.total__progress--percentage {
+  float: left;
+  margin-bottom: 0.375rem;
+}
+.total__progress--remaining {
+  float: right;
+  margin-bottom: 0.375em;
+}
+.total__progress--bar {
+  background-color: #FFFFFF;
+  clear: both;
+  max-width: 100%;
+  height: 100%;
+  width: 0;
+  transition-duration: 0.4s;
+}
+.total__progress--bar-background {
+  background-color: rgba(255, 255, 255, 0.25);
+  clear: both;
+  position: relative;
+  height: 1.25rem;
+  width: 100%;
+}
+.total__progress--bar-error {
+  background-color: rgba(204, 51, 51, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100%;
+  width: 0;
+  transition-duration: 0.4s;
+}
+.total__weight {
+  float: right;
+  width: 15%;
+}
+.total__weight--label {
+  display: inline-block;
+  margin-bottom: 0.375rem;
+}
+.total__weight--field {
+  text-align: right;
+}
+
+@media screen and (min-width: 480px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 720px) {
+  html {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1080px) {
+  html {
+    font-size: 20px;
+  }
+}
+.row:after, .character:after, .inventory__header:after, .inventory__item:after, .total__progress:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*# sourceMappingURL=style.css.map */
