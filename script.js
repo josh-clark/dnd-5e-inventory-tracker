@@ -6,7 +6,7 @@
 		if (character.strength > 30) {
 			return false;
 		}
-		if (!(["0.5", "1", "2", "4", "8"].indexOf(character.sizeMultiplier) > -1)) {
+		if (!([0.5, 1, 2, 4, 8].indexOf(character.sizeMultiplier) > -1)) {
 			return false;
 		}
 
@@ -24,20 +24,47 @@
 		return true;
 	}
 
+	function clearItems() {
+		$(".inventory__item:not(.sample)").remove();
+		$("#character__score").val($("#character__score").attr("value"));
+		$("#character__size-multiplier").val($("#character__size-multiplier option[selected]").attr("value"));
+		$("#character__multiplier").val($("#character__multiplier option[selected]").attr("value"));
+	}
+
 	function scrollToBottom() {
 		$("html, body").clearQueue();
 		$("html, body").animate({scrollTop: $(document).height()});
 	}
 
-	function loadValues() {
-		// Load the values from the URL query parameters.
+	/**
+	 * Load the values from the history state.
+	 */
+	function loadValues(saveData) {
+		if (saveData && isValidCharacter(saveData)) {
+			clearItems();
+
+			$("#character__score").val(saveData.strength);
+			$("#character__size-multiplier").val($("#character__size-multiplier option[data-value='" + saveData.sizeMultiplier + "']").val());
+			$("#character__multiplier").val(saveData.multiplier);
+
+			jQuery.each(saveData.items, function (index, item) {
+				var $item = addInventoryItem();
+				$item.find(".inventory__item--name--field").val(item.name);
+				$item.find(".inventory__item--weight--field").val(item.weight);
+				$item.find(".inventory__item--quantity--field").val(item.quantity);
+			});
+		}
+
+		calculate();
 	}
 
+	/**
+	 * Save the values to the URL query parameters and history state.
+	 */
 	function saveValues() {
-		// Save the values to the URL query parameters.
 		var saveData = {};
 		saveData.strength = $("#character__score").val();
-		saveData.sizeMultiplier = $("#character__size-multiplier").val();
+		saveData.sizeMultiplier = $("#character__size-multiplier option:selected").data("value");
 		saveData.multiplier = $("#character__multiplier").val();
 		saveData.items = [];
 
@@ -62,13 +89,8 @@
 			}
 		});
 
-		// TODO: Remove
-		console.log(saveData);
-		console.log(JSON.stringify(saveData));
-		console.log(encodeURIComponent(JSON.stringify(saveData)));
-		// TODO: Remove
-
-		encodeURIComponent(JSON.stringify(saveData));
+		var saveDataEncoded = encodeURIComponent(JSON.stringify(saveData));
+		history.pushState(saveData, "", "?data=" + saveDataEncoded);
 	}
 
 	function addInventoryItem() {
@@ -76,15 +98,18 @@
 		$newRow.removeClass("sample");
 		$newRow.find(".field").on("input change", calculate);
 		$(".inventory__controls").before($newRow);
+
 		scrollToBottom();
 		calculate();
+		return $newRow;
 	}
 
 	function calculateCharacter() {
 		var strength = $("#character__score").val();
-		var sizeMultiplier = $("#character__size-multiplier").val();
+		var sizeMultiplier = $("#character__size-multiplier option:selected").data("value");
 		var multiplier = $("#character__multiplier").val();
 		var capacity = strength * sizeMultiplier * multiplier;
+
 		$("#character__capacity").val(capacity + $("#character__capacity").data("unit"));
 	}
 
@@ -93,6 +118,7 @@
 		var weight = $this.find(".inventory__item--weight--field").val();
 		var quantity = $this.find(".inventory__item--quantity--field").val();
 		var subtotal = weight * quantity;
+
 		$this.find(".inventory__item--subtotal--field").val(subtotal + $(".inventory__item--subtotal--field").data("unit"));
 	}
 
@@ -123,7 +149,15 @@
 		calculateCharacter();
 		$(".inventory__item:not(.sample)").each(calculateInventory);
 		calculateTotal();
-		saveValues();
+	}
+
+	window.onpopstate = function(event) {
+		if (event && event.state) {
+			loadValues(event.state);
+		}
+		else {
+			console.log("Failed to load stored data from history state.");
+		}
 	}
 
 	$(document).ready(function () {
