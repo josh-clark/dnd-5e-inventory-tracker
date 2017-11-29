@@ -19,9 +19,6 @@
 		if (character.strength > 30) {
 			return false;
 		}
-		if (!([0.5, 1, 2, 4, 8].indexOf(character.sizeMultiplier) > -1)) {
-			return false;
-		}
 
 		return true;
 	}
@@ -57,7 +54,7 @@
 			clearItems();
 
 			$("#character__score").val(saveData.strength);
-			$("#character__size-multiplier").val($("#character__size-multiplier option[data-value='" + saveData.sizeMultiplier + "']").val());
+			$("#character__size-multiplier").val(saveData.sizeMultiplier);
 			$("#character__multiplier").val(saveData.multiplier);
 
 			jQuery.each(saveData.items, function (index, item) {
@@ -77,7 +74,7 @@
 	function saveValues() {
 		var saveData = {};
 		saveData.strength = $("#character__score").val();
-		saveData.sizeMultiplier = $("#character__size-multiplier option:selected").data("value");
+		saveData.sizeMultiplier = $("#character__size-multiplier").val();
 		saveData.multiplier = $("#character__multiplier").val();
 		saveData.items = [];
 
@@ -172,7 +169,6 @@
 			console.log("Failed to load stored data from history state.");
 
 			var saveData = getParameterByName("data");
-			console.log(saveData);
 			if (saveData) {
 				loadValues(JSON.parse(saveData));
 			}
