@@ -46,27 +46,16 @@
 
 		<div class="inventory">
 			<div class="inventory__header row">
-				<div class="inventory__item--name">
-					Name
-				</div>
-
-				<div class="inventory__item--weight">
-					Weight
-				</div>
-
-				<div class="inventory__item--quantity">
-					Quantity
-				</div>
-
-				<div class="inventory__item--subtotal">
-					Subtotal
-				</div>
+				<div class="inventory__item--name">Item</div>
+				<div class="inventory__item--weight">Weight</div>
+				<div class="inventory__item--quantity">Quantity</div>
+				<div class="inventory__item--subtotal">Subtotal</div>
 			</div>
 
 			<div class="inventory__item row sample">
 				<div class="inventory__item--name">
-					<label class="inventory__item--name--label label">Name</label>
-					<input class="inventory__item--name--field field" type="text" placeholder="Name" />
+					<label class="inventory__item--name--label label">Item</label>
+					<input class="inventory__item--name--field field" type="text" placeholder="Item" />
 				</div>
 
 				<div class="inventory__item--weight">
@@ -88,6 +77,7 @@
 			</div>
 
 			<div class="inventory__controls row">
+				<button class="inventory__controls--save" type="submit" value="save">Save</button>
 				<button class="inventory__controls--add-row" type="submit" value="add">Add Item</button>
 			</div>
 		</div>

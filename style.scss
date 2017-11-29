@@ -5,6 +5,7 @@ $color-error: #CC3333;
 
 $color-header-bg: #212121;
 $color-body-bg: #C2C2C2;
+$color-inventory-bg: #D3D3D3;
 $color-footer-bg: #242424;
 $color-progress-bar: $color-white;
 $color-progress-bar-bg: rgba($color-white, 0.25);
@@ -13,6 +14,8 @@ $color-field-bg: rgba($color-white, 0.25);
 $color-field: $color-white;
 
 $header-height: 4rem;
+$inventory-header-height: 1.875rem;
+$controls-height: (8rem / 3);
 $footer-height: 4rem;
 
 * {
@@ -49,6 +52,7 @@ body {
 	color: $color-field;
 	font-size: 1rem;
 	height: 1.25rem;
+	height: calc(1.25rem - 1px);
 	max-width: 100%;
 	padding-right: 0;
 	padding-left: 0.25rem;
@@ -137,6 +141,10 @@ body {
 }
 
 .inventory {
+	padding-top: $inventory-header-height;
+	padding-bottom: $controls-height;
+	@extend %clearfix;
+
 	&__header,
 	&__item {
 		padding-top: 0.375rem;
@@ -145,7 +153,14 @@ body {
 	}
 
 	&__header {
-		
+		background-color: $color-body-bg;
+		height: $inventory-header-height;
+		padding-top: 0.5rem;
+		position: fixed;
+		top: $header-height;
+		right: 0;
+		left: 0;
+		z-index: 80;
 	}
 
 	&__item {
@@ -200,8 +215,10 @@ body {
 
 			&--unit {
 				position: absolute;
-				top: 0.125rem;
+				top: 0;
 				display: none;
+				line-height: 1.25rem;
+				line-height: calc(1.25rem - 1px);
 			}
 			&--field:not(:placeholder-shown) ~ &--unit {
 				display: block;
@@ -253,10 +270,21 @@ body {
 	}
 
 	&__controls {
+		background-color: $color-body-bg;
+		height: $controls-height;
 		margin-top: 0.5rem;
+		margin-right: auto;
+		margin-left: auto;
+		padding: 0.5rem;
 		text-align: center;
+		position: fixed;
+		right: 0;
+		bottom: $footer-height;
+		left: 0;
+		z-index: 85;
 
-		&--add-row {
+		&--add-row,
+		&--save {
 			background-color: rgba($color-white, 0.75);
 			border: none;
 			color: $color-text;

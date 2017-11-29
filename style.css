@@ -31,6 +31,7 @@ body {
   color: #FFFFFF;
   font-size: 1rem;
   height: 1.25rem;
+  height: calc(1.25rem - 1px);
   max-width: 100%;
   padding-right: 0;
   padding-left: 0.25rem;
@@ -101,9 +102,23 @@ body {
   text-align: right;
 }
 
+.inventory {
+  padding-top: 1.875rem;
+  padding-bottom: 2.66667rem;
+}
 .inventory__header, .inventory__item {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
+}
+.inventory__header {
+  background-color: #C2C2C2;
+  height: 1.875rem;
+  padding-top: 0.5rem;
+  position: fixed;
+  top: 4rem;
+  right: 0;
+  left: 0;
+  z-index: 80;
 }
 .inventory__item.sample {
   display: none;
@@ -142,8 +157,10 @@ body {
 }
 .inventory__item--weight--unit, .inventory__item--quantity--unit {
   position: absolute;
-  top: 0.125rem;
+  top: 0;
   display: none;
+  line-height: 1.25rem;
+  line-height: calc(1.25rem - 1px);
 }
 .inventory__item--weight--field:not(:placeholder-shown) ~ .inventory__item--weight--unit, .inventory__item--quantity--field:not(:placeholder-shown) ~ .inventory__item--weight--unit, .inventory__item--weight--field:not(:placeholder-shown) ~ .inventory__item--quantity--unit, .inventory__item--quantity--field:not(:placeholder-shown) ~ .inventory__item--quantity--unit {
   display: block;
@@ -177,10 +194,20 @@ body {
   width: auto;
 }
 .inventory__controls {
+  background-color: #C2C2C2;
+  height: 2.66667rem;
   margin-top: 0.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0.5rem;
   text-align: center;
+  position: fixed;
+  right: 0;
+  bottom: 4rem;
+  left: 0;
+  z-index: 85;
 }
-.inventory__controls--add-row {
+.inventory__controls--add-row, .inventory__controls--save {
   background-color: rgba(255, 255, 255, 0.75);
   border: none;
   color: #242424;
@@ -267,7 +294,7 @@ body {
     font-size: 20px;
   }
 }
-.row:after, .character:after, .inventory__header:after, .inventory__item:after, .total__progress:after {
+.row:after, .character:after, .inventory:after, .inventory__header:after, .inventory__item:after, .total__progress:after {
   content: "";
   display: table;
   clear: both;

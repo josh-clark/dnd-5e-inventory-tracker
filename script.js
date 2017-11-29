@@ -1,10 +1,74 @@
 (function ($) {
+	function isValidCharacter(character) {
+		if (character.strength < 1) {
+			return false;
+		}
+		if (character.strength > 30) {
+			return false;
+		}
+		if (!(["0.5", "1", "2", "4", "8"].indexOf(character.sizeMultiplier) > -1)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	function isValidItem(item) {
+		if (item.weight < 0) {
+			return false;
+		}
+		if (item.quantity < 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	function scrollToBottom() {
+		$("html, body").clearQueue();
+		$("html, body").animate({scrollTop: $(document).height()});
+	}
+
 	function loadValues() {
 		// Load the values from the URL query parameters.
 	}
 
 	function saveValues() {
-		// Load the values to the URL query parameters.
+		// Save the values to the URL query parameters.
+		var saveData = {};
+		saveData.strength = $("#character__score").val();
+		saveData.sizeMultiplier = $("#character__size-multiplier").val();
+		saveData.multiplier = $("#character__multiplier").val();
+		saveData.items = [];
+
+		if (!isValidCharacter(saveData)) {
+			console.log("Failure to save: invalid character data.")
+			return false;
+		}
+
+		$(".inventory__item:not(.sample)").each(function () {
+			var $this = $(this);
+			var item = {};
+			item.name = $this.find(".inventory__item--name--field").val();
+			item.weight = $this.find(".inventory__item--weight--field").val();
+			item.quantity = $this.find(".inventory__item--quantity--field").val();
+
+			if (isValidItem(item)) {
+				saveData.items.push(item);
+			}
+			else {
+				console.log("Unable to save item: invalid item data.");
+				console.log($this);
+			}
+		});
+
+		// TODO: Remove
+		console.log(saveData);
+		console.log(JSON.stringify(saveData));
+		console.log(encodeURIComponent(JSON.stringify(saveData)));
+		// TODO: Remove
+
+		encodeURIComponent(JSON.stringify(saveData));
 	}
 
 	function addInventoryItem() {
@@ -12,6 +76,7 @@
 		$newRow.removeClass("sample");
 		$newRow.find(".field").on("input change", calculate);
 		$(".inventory__controls").before($newRow);
+		scrollToBottom();
 		calculate();
 	}
 
@@ -65,6 +130,7 @@
 		loadValues();
 		$(".field").on("input change", calculate);
 		$(".inventory__controls--add-row").on("click submit", addInventoryItem);
+		$(".inventory__controls--save").on("click submit", saveValues);
 		calculate();
 	});
 })(jQuery);
