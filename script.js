@@ -1,4 +1,17 @@
 (function ($) {
+	/**
+	 * @url https://stackoverflow.com/a/901144
+	 */
+	function getParameterByName(name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
 	function isValidCharacter(character) {
 		if (character.strength < 1) {
 			return false;
@@ -37,7 +50,7 @@
 	}
 
 	/**
-	 * Load the values from the history state.
+	 * Load the values from the URL query parameters or history state.
 	 */
 	function loadValues(saveData) {
 		if (saveData && isValidCharacter(saveData)) {
@@ -151,14 +164,23 @@
 		calculateTotal();
 	}
 
-	window.onpopstate = function(event) {
+	$(window).on("load onpopstate", function (event) {
 		if (event && event.state) {
 			loadValues(event.state);
 		}
 		else {
 			console.log("Failed to load stored data from history state.");
+
+			var saveData = getParameterByName("data");
+			console.log(saveData);
+			if (saveData) {
+				loadValues(JSON.parse(saveData));
+			}
+			else {
+				console.log("Failed to load stored data from URL query parameters.");
+			}
 		}
-	}
+	});
 
 	$(document).ready(function () {
 		loadValues();
