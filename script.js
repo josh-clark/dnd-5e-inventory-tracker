@@ -132,12 +132,30 @@
 		$this.find(".inventory__item--subtotal--field").val(subtotal + $(".inventory__item--subtotal--field").data("unit"));
 	}
 
+	function calculateMoney() {
+		var copper = parseInt($(".inventory__money--copper--field").val(), 10);
+		var silver = parseInt($(".inventory__money--silver--field").val(), 10);
+		var electrum = parseInt($(".inventory__money--electrum--field").val(), 10);
+		var gold = parseInt($(".inventory__money--gold--field").val(), 10);
+		var platinum = parseInt($(".inventory__money--platinum--field").val(), 10);
+
+		copper = isNaN(copper) ? 0 : copper;
+		silver = isNaN(silver) ? 0 : silver;
+		electrum = isNaN(electrum) ? 0 : electrum;
+		gold = isNaN(gold) ? 0 : gold;
+		platinum = isNaN(platinum) ? 0 : platinum;
+
+		var subtotal = (copper + silver + electrum + gold + platinum) / 50;
+		$(".inventory__money--subtotal--field").val(subtotal + $(".inventory__money--subtotal--field").data("unit"));
+	}
+
 	function calculateTotal() {
 		var capacity = parseInt($("#character__capacity").val(), 10);
 		var total = 0;
 		$(".inventory__item:not(.sample) .inventory__item--subtotal--field").each(function () {
 			total += parseInt(this.value, 10);
 		});
+		total += parseInt($(".inventory__money--subtotal--field").val(), 10);
 		$(".total__weight--field").val(total + $(".total__weight--field").data("unit"));
 
 		var progress = total / capacity;
@@ -158,6 +176,7 @@
 	function calculate() {
 		calculateCharacter();
 		$(".inventory__item:not(.sample)").each(calculateInventory);
+		calculateMoney();
 		calculateTotal();
 	}
 
@@ -180,6 +199,7 @@
 
 	$(document).ready(function () {
 		loadValues();
+		//$.getJSON("data.json").done();
 		$(".field").on("input change", calculate);
 		$(".inventory__controls--add-row").on("click submit", addInventoryItem);
 		$(".inventory__controls--save").on("click submit", saveValues);

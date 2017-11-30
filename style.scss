@@ -15,7 +15,8 @@ $color-field: $color-white;
 
 $header-height: 4rem;
 $inventory-header-height: 1.875rem;
-$controls-height: (8rem / 3);
+$money-height: 2.194444rem;
+$controls-height: (8rem / 3) - 0.5rem;
 $footer-height: 4rem;
 
 * {
@@ -142,7 +143,7 @@ body {
 
 .inventory {
 	padding-top: $inventory-header-height;
-	padding-bottom: $controls-height;
+	padding-bottom: $controls-height + $money-height;
 	@extend %clearfix;
 
 	&__header,
@@ -269,13 +270,88 @@ body {
 		}
 	}
 
+	&__money {
+		background-color: $color-body-bg;
+		height: $money-height;
+		margin-right: auto;
+		margin-left: auto;
+		padding: 0.5rem 0.75rem;
+		text-align: center;
+		position: fixed;
+		right: 0;
+		bottom: $footer-height + $controls-height;
+		left: 0;
+		z-index: 80;
+
+		&--copper,
+		&--silver,
+		&--electrum,
+		&--gold,
+		&--platinum,
+		&--subtotal {
+			float: left;
+
+			&--field {
+				background-color: rgba(255, 255, 255, 0.5);
+				color: #242424;
+				text-align: center;
+				width: 100%;
+
+				
+			}
+			&--field:not(:placeholder-shown) ~ &--unit {
+				display: block;
+			}
+
+			&--unit {
+				display: none;
+				line-height: 1.25rem;
+				line-height: calc(1.25rem - 1px);
+				position: absolute;
+				top: 0;
+				right: 1rem + 0.25rem;
+			}
+		}
+
+		&--copper,
+		&--silver,
+		&--electrum,
+		&--gold,
+		&--platinum {
+			padding-right: 1rem;
+			position: relative;
+			width: 17%;
+
+			&--field {
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+				}
+
+				&:not(:placeholder-shown) {
+					padding-right: 1.875rem;
+					text-align: right;
+				}
+			}
+		}
+
+		&--subtotal {
+			padding-right: 0;
+			width: 15%;
+
+			&--field {
+				padding-right: 0.25rem;
+				text-align: right;
+			}
+		}
+	}
+
 	&__controls {
 		background-color: $color-body-bg;
 		height: $controls-height;
-		margin-top: 0.5rem;
 		margin-right: auto;
 		margin-left: auto;
-		padding: 0.5rem;
+		padding: 0 0.75rem 0.5rem;
 		text-align: center;
 		position: fixed;
 		right: 0;
