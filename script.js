@@ -34,6 +34,14 @@
 		return true;
 	}
 
+	function isValidMoney(saveData) {
+		if (!saveData.money) {
+			return false;
+		}
+
+		return true;
+	}
+
 	function clearItems() {
 		$(".inventory__item:not(.sample)").remove();
 		$("#character__score").val($("#character__score").attr("value"));
@@ -50,12 +58,14 @@
 	 * Load the values from the URL query parameters or history state.
 	 */
 	function loadValues(saveData) {
-		if (saveData && isValidCharacter(saveData)) {
+		if (saveData) {
 			clearItems();
 
-			$("#character__score").val(saveData.strength);
-			$("#character__size-multiplier").val(saveData.sizeMultiplier);
-			$("#character__multiplier").val(saveData.multiplier);
+			if (isValidCharacter(saveData)) {
+				$("#character__score").val(saveData.strength);
+				$("#character__size-multiplier").val(saveData.sizeMultiplier);
+				$("#character__multiplier").val(saveData.multiplier);
+			}
 
 			jQuery.each(saveData.items, function (index, item) {
 				var $item = addInventoryItem();
@@ -63,6 +73,14 @@
 				$item.find(".inventory__item--weight--field").val(item.weight);
 				$item.find(".inventory__item--quantity--field").val(item.quantity);
 			});
+
+			if (isValidMoney(saveData)) {
+				$(".inventory__money--copper--field").val(saveData.money.copper);
+				$(".inventory__money--silver--field").val(saveData.money.silver);
+				$(".inventory__money--electrum--field").val(saveData.money.electrum);
+				$(".inventory__money--gold--field").val(saveData.money.gold);
+				$(".inventory__money--platinum--field").val(saveData.money.platinum);
+			}
 		}
 
 		calculate();
@@ -77,6 +95,7 @@
 		saveData.sizeMultiplier = $("#character__size-multiplier").val();
 		saveData.multiplier = $("#character__multiplier").val();
 		saveData.items = [];
+		saveData.money = {};
 
 		if (!isValidCharacter(saveData)) {
 			console.log("Failure to save: invalid character data.")
@@ -98,6 +117,12 @@
 				console.log($this);
 			}
 		});
+
+		saveData.money.copper = $(".inventory__money--copper--field").val();
+		saveData.money.silver = $(".inventory__money--silver--field").val();
+		saveData.money.electrum = $(".inventory__money--electrum--field").val();
+		saveData.money.gold = $(".inventory__money--gold--field").val();
+		saveData.money.platinum = $(".inventory__money--platinum--field").val();
 
 		var saveDataEncoded = encodeURIComponent(JSON.stringify(saveData));
 		history.pushState(saveData, "", "?data=" + saveDataEncoded);
@@ -153,13 +178,15 @@
 		var capacity = parseInt($("#character__capacity").val(), 10);
 		var total = 0;
 		$(".inventory__item:not(.sample) .inventory__item--subtotal--field").each(function () {
-			total += parseInt(this.value, 10);
+			total += parseFloat(this.value);
 		});
-		total += parseInt($(".inventory__money--subtotal--field").val(), 10);
+		total += parseFloat($(".inventory__money--subtotal--field").val());
+		total = parseFloat(total.toFixed(2));
 		$(".total__weight--field").val(total + $(".total__weight--field").data("unit"));
 
 		var progress = total / capacity;
 		var difference = capacity - total;
+		difference = parseFloat(difference.toFixed(2));
 		$(".total__progress--bar").width((progress * 100) + "%");
 		$(".total__progress--percentage").text(Math.round(progress * 100) + "%");
 
