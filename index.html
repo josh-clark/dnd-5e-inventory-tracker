@@ -76,10 +76,49 @@
 				</div>
 			</div>
 
+			<div class="inventory__money row">
+				<div class="inventory__money--copper">
+					<input class="inventory__money--copper--field field" type="number" min="0" placeholder="CP" />
+					<label class="inventory__money--copper--unit unit">CP</label>
+				</div>
+
+				<div class="inventory__money--silver">
+					<input class="inventory__money--silver--field field" type="number" min="0" placeholder="SP" />
+					<label class="inventory__money--silver--unit unit">SP</label>
+				</div>
+
+				<div class="inventory__money--electrum">
+					<input class="inventory__money--electrum--field field" type="number" min="0" placeholder="EP" />
+					<label class="inventory__money--electrum--unit unit">EP</label>
+				</div>
+
+				<div class="inventory__money--gold">
+					<input class="inventory__money--gold--field field" type="number" min="0" placeholder="GP" />
+					<label class="inventory__money--gold--unit unit">GP</label>
+				</div>
+
+				<div class="inventory__money--platinum">
+					<input class="inventory__money--platinum--field field" type="number" min="0" placeholder="PP" />
+					<label class="inventory__money--platinum--unit unit">PP</label>
+				</div>
+
+				<div class="inventory__money--subtotal">
+					<input class="inventory__money--subtotal--field field" type="text" readonly data-unit=" lb." />
+				</div>
+			</div>
+
 			<div class="inventory__controls row">
 				<button class="inventory__controls--save" type="submit" value="save">Save</button>
 				<button class="inventory__controls--add-row" type="submit" value="add">Add Item</button>
+				<button class="inventory__controls--remove-row" type="submit" value="remove">Remove</button>
 			</div>
+		</div>
+
+		<div class="autocomplete">
+			<ul class="autocomplete__entry sample">
+				<li class="autocomplete__entry--name"></li>
+				<li class="autocomplete__entry--weight" data-unit=" lb."></li>
+			</ul>
 		</div>
 
 		<div class="total">

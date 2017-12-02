@@ -104,7 +104,7 @@ body {
 
 .inventory {
   padding-top: 1.875rem;
-  padding-bottom: 2.66667rem;
+  padding-bottom: 4.36111rem;
 }
 .inventory__header, .inventory__item {
   padding-top: 0.375rem;
@@ -123,7 +123,10 @@ body {
 .inventory__item.sample {
   display: none;
 }
-.inventory__item:nth-of-type(odd) {
+.inventory__item.active {
+  box-shadow: inset 0 0 2rem rgba(255, 255, 0, 0.5);
+}
+.inventory__item:nth-of-type(even) {
   background-color: rgba(255, 255, 255, 0.25);
 }
 .inventory__item--name, .inventory__item--weight, .inventory__item--quantity, .inventory__item--subtotal {
@@ -193,13 +196,65 @@ body {
   text-align: right;
   width: auto;
 }
-.inventory__controls {
+.inventory__money {
   background-color: #C2C2C2;
-  height: 2.66667rem;
-  margin-top: 0.5rem;
+  height: 2.19444rem;
   margin-right: auto;
   margin-left: auto;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  position: fixed;
+  right: 0;
+  bottom: 6.16667rem;
+  left: 0;
+  z-index: 80;
+}
+.inventory__money--copper, .inventory__money--silver, .inventory__money--electrum, .inventory__money--gold, .inventory__money--platinum, .inventory__money--subtotal {
+  float: left;
+}
+.inventory__money--copper--field, .inventory__money--silver--field, .inventory__money--electrum--field, .inventory__money--gold--field, .inventory__money--platinum--field, .inventory__money--subtotal--field {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #242424;
+  text-align: center;
+  width: 100%;
+}
+.inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--copper--unit, .inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--silver--unit, .inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--electrum--unit, .inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--gold--unit, .inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--platinum--unit, .inventory__money--copper--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit, .inventory__money--silver--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit, .inventory__money--electrum--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit, .inventory__money--gold--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit, .inventory__money--platinum--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit, .inventory__money--subtotal--field:not(:placeholder-shown) ~ .inventory__money--subtotal--unit {
+  display: block;
+}
+.inventory__money--copper--unit, .inventory__money--silver--unit, .inventory__money--electrum--unit, .inventory__money--gold--unit, .inventory__money--platinum--unit, .inventory__money--subtotal--unit {
+  display: none;
+  line-height: 1.25rem;
+  line-height: calc(1.25rem - 1px);
+  position: absolute;
+  top: 0;
+  right: 1.25rem;
+}
+.inventory__money--copper, .inventory__money--silver, .inventory__money--electrum, .inventory__money--gold, .inventory__money--platinum {
+  padding-right: 1rem;
+  position: relative;
+  width: 17%;
+}
+.inventory__money--copper--field::-webkit-inner-spin-button, .inventory__money--copper--field::-webkit-outer-spin-button, .inventory__money--silver--field::-webkit-inner-spin-button, .inventory__money--silver--field::-webkit-outer-spin-button, .inventory__money--electrum--field::-webkit-inner-spin-button, .inventory__money--electrum--field::-webkit-outer-spin-button, .inventory__money--gold--field::-webkit-inner-spin-button, .inventory__money--gold--field::-webkit-outer-spin-button, .inventory__money--platinum--field::-webkit-inner-spin-button, .inventory__money--platinum--field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.inventory__money--copper--field:not(:placeholder-shown), .inventory__money--silver--field:not(:placeholder-shown), .inventory__money--electrum--field:not(:placeholder-shown), .inventory__money--gold--field:not(:placeholder-shown), .inventory__money--platinum--field:not(:placeholder-shown) {
+  padding-right: 1.875rem;
+  text-align: right;
+}
+.inventory__money--subtotal {
+  padding-right: 0;
+  width: 15%;
+}
+.inventory__money--subtotal--field {
+  padding-right: 0.25rem;
+  text-align: right;
+}
+.inventory__controls {
+  background-color: #C2C2C2;
+  height: 2.16667rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 0.75rem 0.5rem;
   text-align: center;
   position: fixed;
   right: 0;
@@ -207,13 +262,56 @@ body {
   left: 0;
   z-index: 85;
 }
-.inventory__controls--add-row, .inventory__controls--save {
+.inventory__controls button {
   background-color: rgba(255, 255, 255, 0.75);
   border: none;
   color: #242424;
   cursor: pointer;
   font-size: 1rem;
   padding: 0.25rem 0.5rem;
+}
+
+.autocomplete {
+  background-color: #F3F3F3;
+  max-height: 50vh;
+  width: 70%;
+  overflow: hidden;
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+.autocomplete.visible {
+  display: block;
+}
+.autocomplete__entry {
+  border-bottom: 1px solid #C2C2C2;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.5rem;
+}
+.autocomplete__entry:last-of-type {
+  border-bottom: none;
+}
+.autocomplete__entry.sample {
+  display: none;
+}
+.autocomplete__entry--name, .autocomplete__entry--weight {
+  color: #404040;
+  display: block;
+  float: left;
+  line-height: 0.95rem;
+  vertical-align: middle;
+}
+.autocomplete__entry--name {
+  font-size: 0.95rem;
+  width: 70%;
+}
+.autocomplete__entry--weight {
+  font-size: 0.85rem;
+  text-align: right;
+  width: 30%;
 }
 
 .total {
@@ -294,7 +392,7 @@ body {
     font-size: 20px;
   }
 }
-.row:after, .character:after, .inventory:after, .inventory__header:after, .inventory__item:after, .total__progress:after {
+.row:after, .character:after, .inventory:after, .inventory__header:after, .inventory__item:after, .autocomplete__entry:after, .total__progress:after {
   content: "";
   display: table;
   clear: both;
