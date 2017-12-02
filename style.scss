@@ -1,11 +1,14 @@
 $color-white: #FFFFFF;
 
 $color-text: #242424;
+$color-text-light: #404040;
 $color-error: #CC3333;
 
 $color-header-bg: #212121;
 $color-body-bg: #C2C2C2;
 $color-inventory-bg: #D3D3D3;
+$color-autocomplete-bg: #F3F3F3;
+$color-autocomplete-border: #C2C2C2;
 $color-footer-bg: #242424;
 $color-progress-bar: $color-white;
 $color-progress-bar-bg: rgba($color-white, 0.25);
@@ -174,7 +177,7 @@ body {
 			box-shadow: inset 0 0 2rem $color-item-active;
 		}
 
-		&:nth-of-type(odd) {
+		&:nth-of-type(even) {
 			background-color: rgba($color-white, 0.25);
 		}
 
@@ -369,6 +372,58 @@ body {
 			cursor: pointer;
 			font-size: 1rem;
 			padding: 0.25rem 0.5rem;
+		}
+	}
+}
+
+.autocomplete {
+	background-color: $color-autocomplete-bg;
+	max-height: 50vh;
+	width: 70%;
+	overflow: hidden;
+	display: none;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 200;
+
+	&.visible {
+		display: block;
+	}
+
+	&__entry {
+		border-bottom: 1px solid $color-autocomplete-border;
+		cursor: pointer;
+		display: block;
+		padding: 0.5rem 0.5rem;
+		@extend %clearfix;
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		&.sample {
+			display: none;
+		}
+
+		&--name,
+		&--weight {
+			color: $color-text-light;
+			display: block;
+			float: left;
+			line-height: 0.95rem;
+			vertical-align: middle;
+		}
+
+		&--name {
+			font-size: 0.95rem;
+			width: 70%;
+		}
+
+		&--weight {
+			font-size: 0.85rem;
+			text-align: right;
+			width: 30%;
 		}
 	}
 }

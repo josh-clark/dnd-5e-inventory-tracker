@@ -126,7 +126,7 @@ body {
 .inventory__item.active {
   box-shadow: inset 0 0 2rem rgba(255, 255, 0, 0.5);
 }
-.inventory__item:nth-of-type(odd) {
+.inventory__item:nth-of-type(even) {
   background-color: rgba(255, 255, 255, 0.25);
 }
 .inventory__item--name, .inventory__item--weight, .inventory__item--quantity, .inventory__item--subtotal {
@@ -271,6 +271,49 @@ body {
   padding: 0.25rem 0.5rem;
 }
 
+.autocomplete {
+  background-color: #F3F3F3;
+  max-height: 50vh;
+  width: 70%;
+  overflow: hidden;
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+.autocomplete.visible {
+  display: block;
+}
+.autocomplete__entry {
+  border-bottom: 1px solid #C2C2C2;
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem 0.5rem;
+}
+.autocomplete__entry:last-of-type {
+  border-bottom: none;
+}
+.autocomplete__entry.sample {
+  display: none;
+}
+.autocomplete__entry--name, .autocomplete__entry--weight {
+  color: #404040;
+  display: block;
+  float: left;
+  line-height: 0.95rem;
+  vertical-align: middle;
+}
+.autocomplete__entry--name {
+  font-size: 0.95rem;
+  width: 70%;
+}
+.autocomplete__entry--weight {
+  font-size: 0.85rem;
+  text-align: right;
+  width: 30%;
+}
+
 .total {
   background-color: #242424;
   color: #FFFFFF;
@@ -349,7 +392,7 @@ body {
     font-size: 20px;
   }
 }
-.row:after, .character:after, .inventory:after, .inventory__header:after, .inventory__item:after, .total__progress:after {
+.row:after, .character:after, .inventory:after, .inventory__header:after, .inventory__item:after, .autocomplete__entry:after, .total__progress:after {
   content: "";
   display: table;
   clear: both;

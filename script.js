@@ -131,10 +131,15 @@
 	function addInventoryItem() {
 		var $newRow = $(".inventory__item.sample").clone();
 		$newRow.removeClass("sample");
+
 		$newRow.find(".field").on("input change", calculate);
 		$newRow.find(".field").on("focusin focusout", setActiveItem);
+		$newRow.find(".inventory__item--name--field").on("keyup", updateAutocomplete);
+		$newRow.find(".field:not(.active)").on("focusin", hideAutocomplete);
+
 		$(".inventory__controls").before($newRow);
 
+		$newRow.find(".inventory__item--name--field").focus();
 		scrollToBottom();
 		calculate();
 		return $newRow;
@@ -219,6 +224,87 @@
 		calculate();
 	}
 
+	function loadAutocompleteData(data) {
+		window.itemList = data;
+	}
+
+	function generateAutocompleteList(value) {
+		var results = [];
+
+		if (window.itemList && window.itemList !== undefined) {
+
+			for (var key in window.itemList) {
+				if (window.itemList.hasOwnProperty(key)) {
+					var itemId = key.toLowerCase();
+					if (value === itemId.slice(0, value.length)) {
+						results.push({
+							"name": window.itemList[key]["name"],
+							"weight": window.itemList[key]["weight"],
+							"class": window.itemList[key]["class"]
+						});
+					}
+				}
+			}
+		}
+
+		return results;
+	}
+
+	function updateAutocomplete(event) {
+		if (window.itemList && window.itemList !== undefined) {
+			var inputValue = this.value.toLowerCase();
+
+			if (inputValue.length > 0) {
+				var results = [];
+				var $resultsList = $(".autocomplete");
+				$resultsList.find(".autocomplete__entry:not(.sample)").remove();
+
+				results = generateAutocompleteList(inputValue);
+				if (results.length > 0) {
+					showAutocomplete();
+				}
+				else {
+					hideAutocomplete();
+				}
+
+				for (i = 0; i < results.length; i++) {
+					var $newEntry = $(".autocomplete__entry.sample").clone();
+					$newEntry.removeClass("sample");
+
+					if (results[i]["class"] && results[i]["class"] !== undefined) {
+						$newEntry.addClass(results[i]["class"]);
+					}
+					$newEntry.find(".autocomplete__entry--name").text(results[i].name);
+					$newEntry.find(".autocomplete__entry--weight").text(results[i].weight + $newEntry.find(".autocomplete__entry--weight").data("unit"));
+					$resultsList.append($newEntry);
+				}
+			}
+		}
+	}
+
+	function showAutocomplete() {
+		$(this).addClass("active");
+		$(".autocomplete").addClass("visible");
+	}
+
+	function hideAutocomplete() {
+		$(".inventory__item--name--field").removeClass("active");
+		$(".autocomplete").removeClass("visible");
+	}
+
+	function selectAutocompleteItem() {
+		var $this = $(this);
+		var name = $this.find(".autocomplete__entry--name").text();
+		var weight = parseFloat($this.find(".autocomplete__entry--weight").text());
+
+		var $item = $(".inventory__item.active");
+		$item.find(".inventory__item--name--field").val(name);
+		$item.find(".inventory__item--weight--field").val(weight);
+
+		hideAutocomplete();
+		$item.find(".inventory__item--quantity--field").focus();
+	}
+
 	$(window).on("load onpopstate", function (event) {
 		if (event && event.state) {
 			loadValues(event.state);
@@ -238,12 +324,18 @@
 
 	$(document).ready(function () {
 		loadValues();
-		//$.getJSON("data.json").done();
+		$.getJSON("data.json").done(loadAutocompleteData);
+
 		$(".field").on("input change", calculate);
 		$(".field").on("focusin focusout", setActiveItem);
+		$(".inventory__item--name--field").on("keyup", updateAutocomplete);
+		$(".field:not(.active)").on("focusin", hideAutocomplete);
+		$(".autocomplete").on("click", ".autocomplete__entry", selectAutocompleteItem);
+
 		$(".inventory__controls--add-row").on("click submit", addInventoryItem);
 		$(".inventory__controls--remove-row").on("click submit", removeActiveItem);
 		$(".inventory__controls--save").on("click submit", saveValues);
+
 		calculate();
 	});
 })(jQuery);
