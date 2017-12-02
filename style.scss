@@ -12,6 +12,7 @@ $color-progress-bar-bg: rgba($color-white, 0.25);
 
 $color-field-bg: rgba($color-white, 0.25);
 $color-field: $color-white;
+$color-item-active: rgba(#FFFF00, 0.5);
 
 $header-height: 4rem;
 $inventory-header-height: 1.875rem;
@@ -165,10 +166,12 @@ body {
 	}
 
 	&__item {
-		@extend %clearfix;
-
 		&.sample {
 			display: none;
+		}
+
+		&.active {
+			box-shadow: inset 0 0 2rem $color-item-active;
 		}
 
 		&:nth-of-type(odd) {
@@ -359,8 +362,7 @@ body {
 		left: 0;
 		z-index: 85;
 
-		&--add-row,
-		&--save {
+		button {
 			background-color: rgba($color-white, 0.75);
 			border: none;
 			color: $color-text;

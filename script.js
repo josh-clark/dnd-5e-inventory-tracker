@@ -132,6 +132,7 @@
 		var $newRow = $(".inventory__item.sample").clone();
 		$newRow.removeClass("sample");
 		$newRow.find(".field").on("input change", calculate);
+		$newRow.find(".field").on("focusin focusout", setActiveItem);
 		$(".inventory__controls").before($newRow);
 
 		scrollToBottom();
@@ -207,6 +208,17 @@
 		calculateTotal();
 	}
 
+	function setActiveItem() {
+		var $field = $(this);
+		$(".inventory__item:not(.sample).active").removeClass("active");
+		$field.closest(".inventory__item:not(.sample)").addClass("active");
+	}
+
+	function removeActiveItem() {
+		$(".inventory__item:not(.sample).active").remove();
+		calculate();
+	}
+
 	$(window).on("load onpopstate", function (event) {
 		if (event && event.state) {
 			loadValues(event.state);
@@ -228,7 +240,9 @@
 		loadValues();
 		//$.getJSON("data.json").done();
 		$(".field").on("input change", calculate);
+		$(".field").on("focusin focusout", setActiveItem);
 		$(".inventory__controls--add-row").on("click submit", addInventoryItem);
+		$(".inventory__controls--remove-row").on("click submit", removeActiveItem);
 		$(".inventory__controls--save").on("click submit", saveValues);
 		calculate();
 	});
