@@ -373,6 +373,14 @@ body {
 			font-size: 1rem;
 			padding: 0.25rem 0.5rem;
 		}
+
+		&--symbol {
+			display: inline;
+		}
+
+		&--word {
+			display: none;
+		}
 	}
 }
 
@@ -505,11 +513,26 @@ body {
 	html {
 		font-size: 16px;
 	}
+
+	.inventory__controls {
+		&--symbol {
+			display: none;
+		}
+		&--word {
+			display: inline;
+		}
+	}
 }
 
 @media screen and (min-width: 720px) {
 	html {
 		font-size: 18px;
+	}
+
+	.inventory__controls {
+		&--symbol {
+			display: inline;
+		}
 	}
 }
 

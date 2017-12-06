@@ -145,6 +145,24 @@
 		return $newRow;
 	}
 
+	function moveActiveItemUp() {
+		var $activeRow = $(".inventory__item:not(.sample).active");
+		var $prevRow = $activeRow.prev(".inventory__item:not(.sample)");
+
+		if ($prevRow) {
+			$prevRow.before($activeRow);
+		}
+	}
+
+	function moveActiveItemDown() {
+		var $activeRow = $(".inventory__item:not(.sample).active");
+		var $nextRow = $activeRow.next(".inventory__item:not(.sample)");
+
+		if ($nextRow) {
+			$nextRow.after($activeRow);
+		}
+	}
+
 	function calculateCharacter() {
 		var strength = $("#character__score").val();
 		var sizeMultiplier = $("#character__size-multiplier option:selected").data("value");
@@ -333,6 +351,8 @@
 		$(".autocomplete").on("click", ".autocomplete__entry", selectAutocompleteItem);
 
 		$(".inventory__controls--add-row").on("click submit", addInventoryItem);
+		$(".inventory__controls--move-up").on("click submit", moveActiveItemUp);
+		$(".inventory__controls--move-down").on("click submit", moveActiveItemDown);
 		$(".inventory__controls--remove-row").on("click submit", removeActiveItem);
 		$(".inventory__controls--save").on("click submit", saveValues);
 

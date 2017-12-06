@@ -270,6 +270,12 @@ body {
   font-size: 1rem;
   padding: 0.25rem 0.5rem;
 }
+.inventory__controls--symbol {
+  display: inline;
+}
+.inventory__controls--word {
+  display: none;
+}
 
 .autocomplete {
   background-color: #F3F3F3;
@@ -381,10 +387,21 @@ body {
   html {
     font-size: 16px;
   }
+
+  .inventory__controls--symbol {
+    display: none;
+  }
+  .inventory__controls--word {
+    display: inline;
+  }
 }
 @media screen and (min-width: 720px) {
   html {
     font-size: 18px;
+  }
+
+  .inventory__controls--symbol {
+    display: inline;
   }
 }
 @media screen and (min-width: 1080px) {
