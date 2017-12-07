@@ -177,6 +177,7 @@
 		var weight = $this.find(".inventory__item--weight--field").val();
 		var quantity = $this.find(".inventory__item--quantity--field").val();
 		var subtotal = weight * quantity;
+		subtotal = parseFloat(subtotal.toFixed(2));
 
 		$this.find(".inventory__item--subtotal--field").val(subtotal + $(".inventory__item--subtotal--field").data("unit"));
 	}
@@ -195,6 +196,7 @@
 		platinum = isNaN(platinum) ? 0 : platinum;
 
 		var subtotal = (copper + silver + electrum + gold + platinum) / 50;
+		subtotal = parseFloat(subtotal.toFixed(2));
 		$(".inventory__money--subtotal--field").val(subtotal + $(".inventory__money--subtotal--field").data("unit"));
 	}
 
